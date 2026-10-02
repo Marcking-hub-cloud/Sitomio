@@ -36,7 +36,8 @@ export default function Resume() {
           <h2 className="resume-section-title">About</h2>
           <p>Bachelor&apos;s student in Chemistry at the University of Milan, with a growing interest in organic chemistry,
             spectrophotometry methods, and biochemistry. Passionate about understanding molecular behaviour through
-            analytical techniques and exploring the chemistry of living systems.</p>
+            analytical techniques and exploring the chemistry of living systems. Holds a certification in
+            <strong>Organometallic Catalysis in Sustainable Chemistry</strong> from the Technical University of Denmark (DTU).</p>
         </section>
 
         {/* Education */}
@@ -50,6 +51,17 @@ export default function Resume() {
             <p className="resume-org">University of Milan (Università degli Studi di Milano)</p>
             <p>Coursework in organic chemistry, physical chemistry, analytical chemistry, biochemistry, and
               spectroscopic methods. Building a strong foundation in laboratory techniques and molecular analysis.</p>
+          </div>
+
+          <div className="resume-entry">
+            <div className="resume-entry-header">
+              <h3>Organometallic Catalysis in Sustainable Chemistry</h3>
+              <span className="resume-date">Aug 2026</span>
+            </div>
+            <p className="resume-org">Technical University of Denmark (DTU)</p>
+            <p>Certificate course covering the principles and applications of organometallic catalysis
+              in the context of sustainable and green chemistry, including catalytic cycles, ligand design,
+              and atom-economical transformations.</p>
           </div>
         </section>
 
