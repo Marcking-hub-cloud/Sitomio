@@ -42,32 +42,32 @@ export default function Motorbike() {
   const [cat, setCat] = useState('moto')
   const [tripIdx, setTripIdx] = useState(0)
 
-  // Update tile layers when theme changes
+  // Map Stadia tile URLs by theme
+  function getTileUrl(t) {
+    return t === 'dark'
+      ? 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
+      : 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
+  }
+
+  // Update tile layer when theme changes
   useEffect(() => {
-    if (!baseLayerRef.current || !labelsLayerRef.current) return
-    const mode = theme
-    baseLayerRef.current.setUrl(`https://{s}.basemaps.cartocdn.com/${mode}_nolabels/{z}/{x}/{y}{r}.png`)
-    labelsLayerRef.current.setUrl(`https://{s}.basemaps.cartocdn.com/${mode}_only_labels/{z}/{x}/{y}{r}.png`)
+    if (!baseLayerRef.current) return
+    baseLayerRef.current.setUrl(getTileUrl(theme))
   }, [theme])
 
   useEffect(() => {
     // Guard: if the container div is already a Leaflet map, skip (happens in Strict Mode re-run)
     if (mapRef.current && mapRef.current._leaflet_id) return
 
-    const mode = document.documentElement.getAttribute('data-theme') || 'dark'
+    const mode = localStorage.getItem('theme') || 'dark'
     const map = L.map(mapRef.current, {
       center: [40, 20], zoom: 3, minZoom: 2, maxZoom: 7, zoomControl: true, worldCopyJump: true,
     })
     leafletMapRef.current = map
 
     baseLayerRef.current = L.tileLayer(
-      `https://{s}.basemaps.cartocdn.com/${mode}_nolabels/{z}/{x}/{y}{r}.png`,
-      { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>', subdomains: 'abcd', maxZoom: 19 }
-    ).addTo(map)
-
-    labelsLayerRef.current = L.tileLayer(
-      `https://{s}.basemaps.cartocdn.com/${mode}_only_labels/{z}/{x}/{y}{r}.png`,
-      { subdomains: 'abcd', maxZoom: 19, pane: 'overlayPane' }
+      getTileUrl(mode),
+      { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://stadiamaps.com/">Stadia Maps</a>', maxZoom: 20 }
     ).addTo(map)
 
     let cancelled = false
