@@ -36,23 +36,16 @@ export default function Motorbike() {
   const mapRef = useRef(null)
   const leafletMapRef = useRef(null)
   const baseLayerRef = useRef(null)
-  const labelsLayerRef = useRef(null)
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState(false)
   const [cat, setCat] = useState('moto')
   const [tripIdx, setTripIdx] = useState(0)
 
-  // Map Stadia tile URLs by theme
-  function getTileUrl(t) {
-    return t === 'dark'
-      ? 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
-      : 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
-  }
-
-  // Update tile layer when theme changes
+  // Update tile CSS filter when theme changes
   useEffect(() => {
     if (!baseLayerRef.current) return
-    baseLayerRef.current.setUrl(getTileUrl(theme))
+    const el = document.querySelector('.leaflet-tile-pane')
+    if (el) el.style.filter = theme === 'dark' ? 'invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%)' : 'none'
   }, [theme])
 
   useEffect(() => {
@@ -66,9 +59,15 @@ export default function Motorbike() {
     leafletMapRef.current = map
 
     baseLayerRef.current = L.tileLayer(
-      getTileUrl(mode),
-      { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://stadiamaps.com/">Stadia Maps</a>', maxZoom: 20 }
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', maxZoom: 19 }
     ).addTo(map)
+
+    // Apply dark filter immediately
+    setTimeout(() => {
+      const el = document.querySelector('.leaflet-tile-pane')
+      if (el) el.style.filter = mode === 'dark' ? 'invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%)' : 'none'
+    }, 50)
 
     let cancelled = false
     fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
