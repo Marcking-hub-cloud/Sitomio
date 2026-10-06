@@ -36,7 +36,7 @@ export default function Resume() {
           <h2 className="resume-section-title">About</h2>
           <p>Bachelor&apos;s student in Chemistry at the University of Milan, with a growing interest in organic chemistry,
             spectrophotometry methods, and biochemistry. Passionate about understanding molecular behaviour through
-            analytical techniques and exploring the chemistry of living systems. Holds a certification in
+            analytical techniques and exploring the chemistry of living systems. Holds a certification in 
             <strong>Organometallic Catalysis in Sustainable Chemistry</strong> from the Technical University of Denmark (DTU).</p>
         </section>
 
