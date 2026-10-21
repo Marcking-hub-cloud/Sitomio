@@ -1,0 +1,41 @@
+/* Vista Home: integrazioni a styles.css (solo token del tema). Sul telefono la prima cosa è la prossima giornata. */
+
+/* classifica in breve: tutta la riga porta alla classifica */
+.rank-btn { appearance: none; width: 100%; background: none; border: 0; border-bottom: 1px solid var(--line); color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.rank-btn:last-child { border-bottom: 0; }
+@media (hover: hover) { .rank-btn:hover { background: var(--card-2); } }
+
+/* iscrizioni aperte */
+.isc-t { min-width: 220px; flex: 1 1 260px; }
+.isc-copy { min-height: 36px; vertical-align: middle; }
+
+@media (max-width: 720px), (max-height: 500px) and (pointer: coarse) {
+  /* le tre schede stanno nella stessa colonna (.stack): prossima giornata, ultima giornata, poi il riepilogo */
+  .home-next { order: -2; }
+  .home-last { order: -1; }
+
+  /* riepilogo compatto: forma su una riga, tre numeri (la posizione è già nella fascia squadra) */
+  .home-hero { padding: 14px 14px 28px; }
+  .home-hero .hero-grid { gap: 12px; padding-bottom: 18px; }
+  .home-hero .form-chips { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; width: 100%; }
+  .home-hero .form-chip .box { min-width: 0; font-size: 16px; }
+  .home-hero .big-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .home-hero .big-stat:first-child, .home-hero .hero-cal { display: none; }
+  .home-hero .big-stat .v { font-size: 30px; }
+  .home-hero .big-stat .l { font-size: 12px; letter-spacing: .06em; }
+
+  /* prossima giornata: prima il conto alla rovescia, poi le gare; il pulsante principale a tutta larghezza */
+  .home-next .pg-cd { order: -1; }
+  .home-next .card-f { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .home-next .card-f .grow { display: none; }
+  .home-next .pg-cta { order: -1; grid-column: 1 / -1; justify-content: center; min-height: 48px; }
+  .home-next .card-f .btn.sm { justify-content: center; padding-inline: 6px; }
+
+  /* iscrizioni: stato su una riga, pulsanti grandi uno sotto l'altro */
+  .isc { flex-direction: column; align-items: stretch; }
+  .isc-t { min-width: 0; flex: none; }
+  .isc-l1 { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .isc-btns { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .isc-btns .btn { justify-content: center; min-height: 44px; }
+  .isc-btns .isc-main { min-height: 48px; font-size: 15px; }
+}

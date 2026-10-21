@@ -1,0 +1,85 @@
+/* Regolamento: indice compatto + articolo leggibile (.rules, max 72ch). Solo token del tema. */
+.reg-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
+
+/* indice */
+.reg-toc:focus { outline: none; }
+.reg-toc { scroll-margin-top: calc(var(--sticky-top) + 12px); } /* l'indice non finisce sotto testata e schede fisse */
+.reg-toc .card-b { padding-top: 14px; }
+.reg-toc ol { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
+.reg-toc li { min-width: 0; }
+.reg-toc button {
+  appearance: none; border: 0; background: none; color: var(--ink); cursor: pointer; width: 100%; text-align: left;
+  display: flex; gap: 8px; align-items: baseline; padding: 6px; border-radius: var(--radius-sm);
+  font-weight: 600; font-size: 14px; line-height: 1.3;
+}
+@media (hover: hover) { .reg-toc button:hover { background: var(--accent-soft); color: var(--accent); } }
+.reg-toc .n { font-family: var(--f-display); font-weight: 800; color: var(--accent); min-width: 1.4em; font-variant-numeric: tabular-nums; }
+@media (max-width: 480px) { .reg-toc ol { grid-template-columns: minmax(0, 1fr); } }
+@media (min-width: 980px) {
+  .reg-layout { grid-template-columns: 250px minmax(0, 1fr); }
+  .reg-toc { position: sticky; top: calc(var(--sticky-top) + 12px); }
+  .reg-toc ol { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* articolo */
+.reg-doc { padding: 18px 18px 24px; }
+.reg-head { border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+.reg-title { font-family: var(--f-display); font-weight: 900; font-size: clamp(28px, 5vw, 38px); line-height: 1; margin: 4px 0 8px; overflow-wrap: anywhere; }
+.reg-doc h2 { scroll-margin-top: calc(var(--sticky-top) + 12px); }
+.reg-doc h2:focus { outline: none; }
+.reg-doc h2 .n { color: var(--accent); }
+.reg-doc ul, .reg-doc ol { padding-left: 1.3em; }
+.reg-doc .tbl-wrap { margin: 8px 0; }
+
+.reg-formula {
+  font-family: var(--f-display); font-weight: 800; font-size: clamp(18px, 4.5vw, 24px); letter-spacing: .01em;
+  background: var(--accent-soft); color: var(--accent); border-radius: var(--radius-sm); padding: 10px 14px; text-align: center; margin: 6px 0 4px;
+}
+.reg-dl { display: grid; grid-template-columns: minmax(0, 10em) minmax(0, 1fr); gap: 6px 14px; margin: 12px 0; }
+.reg-dl dt { font-family: var(--f-label); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: 12px; color: var(--muted); padding-top: 3px; }
+.reg-dl dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 420px) { .reg-dl { grid-template-columns: minmax(0, 1fr); gap: 0; } .reg-dl dd { margin-bottom: 8px; } }
+.reg-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+
+/* esempi di fantavoto */
+.reg-ex { background: var(--card-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; margin: 12px 0; }
+.reg-ex h3 { margin: 2px 0 4px; }
+.reg-ex p { margin: 0 0 8px; }
+.reg-tot { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 2px solid var(--line); margin-top: 6px; padding-top: 6px; font-weight: 700; }
+
+/* riquadro della disponibilità in vigore (asta a quote) */
+.reg-box { background: var(--accent-soft); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius-sm); padding: 12px 14px; margin: 12px 0; }
+.reg-box h3 { margin: 2px 0 6px; }
+.reg-box p { margin: 0 0 8px; }
+.reg-box ul { margin: 0 0 8px; }
+.reg-box > :last-child { margin-bottom: 0; }
+
+/* tabelle bonus/malus: stesse colonne in tutti i gruppi */
+.reg-voci th:first-child { width: 30%; }
+.reg-voci th:last-child { width: 5em; }
+@media (max-width: 979px) { .reg-toc { max-width: 72ch; } }
+
+/* indice a portata di pollice (sotto i 980px, dove l'indice non è affiancato) */
+.reg-fab {
+  position: fixed; z-index: 35; right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: calc(16px + var(--botnav-h) + var(--bottom-ui) + env(safe-area-inset-bottom, 0px));
+  min-height: 48px; padding: 0 18px; box-shadow: var(--shadow), 0 6px 18px rgba(0, 0, 0, .2);
+}
+.reg-toc-list { list-style: none; margin: 0; padding: 0; }
+.reg-toc-list button {
+  appearance: none; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--ink); cursor: pointer; width: 100%; text-align: left;
+  display: flex; gap: 10px; align-items: center; min-height: 52px; padding: 6px 2px; font-weight: 600; font-size: 16px;
+}
+.reg-toc-list li:last-child button { border-bottom: 0; }
+.reg-toc-list .n { font-family: var(--f-display); font-weight: 800; color: var(--accent); min-width: 1.6em; }
+@media (pointer: coarse) { .reg-toc button { min-height: 44px; align-items: center; } }
+@media (max-width: 480px) {
+  /* tabelle del regolamento a filo della scheda e senza colonne che non vanno a capo */
+  .reg-doc { padding: 14px 14px 20px; }
+  .reg-doc .tbl-wrap { margin-inline: -14px; }
+  .reg-doc .tbl th:first-child, .reg-doc .tbl td:first-child { padding-left: 14px; }
+  .reg-doc .tbl th:last-child, .reg-doc .tbl td:last-child { padding-right: 14px; }
+  .rules .tbl td:last-child:not(.r) { white-space: normal; }
+  .reg-doc .tbl th, .reg-doc .tbl td { padding-left: 7px; padding-right: 7px; }
+  .reg-doc .tbl th { white-space: normal; letter-spacing: .03em; }
+}

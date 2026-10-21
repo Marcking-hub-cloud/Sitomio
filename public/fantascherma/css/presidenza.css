@@ -1,0 +1,62 @@
+/* Presidenza: rifiniture della vista (la struttura funziona anche senza questo file). Solo token del tema. */
+.pz .input.num { padding-inline: 8px; }
+/* iOS: i campi data vuoti collassano in altezza */
+.pz input[type="date"].input, .pz input[type="datetime-local"].input { min-height: 40px; }
+.pz .code-box { max-height: 120px; user-select: all; }
+.pz details.more > summary { padding: 2px 0; }
+.pz details.more[open] > summary { margin-bottom: 4px; }
+.pz .subtabs .pill .tag { line-height: 1.4; }
+.pz .tbl tr.click:focus-within td { background: var(--card-2); }
+/* Regole, asta a quote: le copie non bastano a completare le rose */
+.pz .pz-alert { color: var(--lamp-red); font-weight: 600; }
+
+/* Regole: anteprima del fantavoto affiancata e sempre in vista sul computer */
+.pz-side { scroll-margin-top: calc(var(--sticky-top) + 12px); }
+@media (min-width: 901px) { .pz-side { position: sticky; top: calc(var(--sticky-top) + 12px); } }
+.pz-savebar { display: none; }
+.pz-lab { display: none; }
+.pz-danger-zone { margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.pz-f-err { margin-right: auto; }
+
+@media (max-width: 900px) {
+  /* modifiche alle regole: la barra con Salva resta in fondo allo schermo, sopra la navigazione */
+  .pz-dirty { display: none; }
+  .pz-savebar {
+    display: flex; align-items: center; gap: 8px; position: fixed; left: 0; right: 0; z-index: 38;
+    bottom: calc(var(--botnav-h) + env(safe-area-inset-bottom, 0px));
+    padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
+    background: var(--card); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(0, 0, 0, .15);
+  }
+  .pz-savebar .btn { min-height: 48px; justify-content: center; }
+  .pz-savebar > .btn:last-child { flex: 1 1 auto; }
+  .pz-sb-fv { appearance: none; border: 1px solid var(--line); background: var(--card-2); color: var(--ink); border-radius: 12px; min-height: 48px; padding: 4px 10px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; cursor: pointer; line-height: 1.1; }
+  .pz-sb-fv b { font-family: var(--f-display); font-weight: 800; font-size: 20px; }
+  :root:has(.pz-savebar) { --bottom-ui: 72px; }
+}
+
+@media (max-width: 720px), (max-height: 500px) and (pointer: coarse) {
+  /* squadre: pulsanti di gestione più lontani tra loro, rosa leggibile */
+  .pz-sq-act { gap: 12px !important; }
+  .pz-sq-act .btn.xs { min-height: 40px; padding-inline: 14px; font-size: 13px; }
+  .pz .pz-rosa { gap: 8px !important; }
+  .pz .pz-rosa button.tag { min-height: 40px; padding: 6px 10px; }
+
+  /* calendario, gare e atleti: ogni riga è una scheda (la riga intera apre la modifica) */
+  .pz-rows thead { display: none; }
+  .pz-rows, .pz-rows tbody { display: block; }
+  .pz-rows tr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; padding: 10px 16px; border-bottom: 1px solid var(--line); position: relative; padding-right: 36px; }
+  .pz-rows tr:last-child { border-bottom: 0; }
+  .pz-rows tr::after { content: "›"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--faint); font-size: 22px; }
+  .pz-rows td { display: block; padding: 0; border: 0; text-align: left !important; white-space: normal !important; }
+  .pz-rows .pz-lab { display: inline; }
+  .pz-rows .pz-c-act { display: none; }
+  .pz-rows .pz-c-t { flex: 1 1 100%; order: -1; }
+  .pz-rows .pz-c-a, .pz-rows .pz-c-b, .pz-rows .pz-c-x, .pz-rows .pz-c-y, .pz-rows .pz-c-z, .pz-rows .pz-c-w { font-size: 13px; color: var(--muted); }
+  .pz-cal .pz-c-n { order: -2; }
+  .pz-cal .pz-c-n .pos { font-size: 16px; }
+  .pz-cal .pz-c-t { flex: 1 1 auto; }
+  .pz-cal .pz-c-a, .pz-cal .pz-c-b { flex: 1 1 100%; }
+  .pz-gare .pz-c-w a { position: relative; z-index: 1; display: inline-block; padding: 12px 8px 12px 0; margin: -12px 0; }
+  .pz-atl .pz-nm { white-space: normal !important; }
+}
+@media (max-width: 900px) { .pz:has(.pz-savebar) { padding-bottom: 80px; } }

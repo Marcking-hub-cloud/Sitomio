@@ -1,0 +1,214 @@
+/* Mercato e Asta — stili aggiuntivi. Solo token del tema (funzionano in chiaro e in scuro). */
+
+/* riquadri numerici (crediti, rosa, spesa massima) */
+.ma-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.ma-kpi { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 8px 12px; min-width: 0; }
+.card .ma-kpi { background: var(--card-2); }
+.ma-kpi .v { font-family: var(--f-display); font-weight: 800; font-size: 26px; line-height: 1.05; font-variant-numeric: tabular-nums; color: var(--ink); }
+.ma-kpi .l { font-family: var(--f-label); font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); overflow-wrap: anywhere; }
+
+/* filtri */
+.ma-filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; align-items: end; }
+
+/* nome atleta cliccabile (apre la scheda) */
+.ma-name { appearance: none; border: 0; background: none; padding: 0; margin: 0; color: inherit; font: inherit; font-weight: 600; cursor: pointer; text-align: left; display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ma-name:hover { color: var(--accent); }
+.ma-name.small { font-size: 13px; }
+.ma-ellip { min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+td .ma-ellip { max-width: 140px; }
+.ma-pill { margin: 2px 4px 2px 0; font-size: 13px; padding: 2px 9px; }
+
+/* movimenti annullati: barrati */
+.tbl tr.ma-strike td:not(.ma-act) { text-decoration: line-through; opacity: .55; }
+
+/* righe della mia squadra (classe propria: la globale .me di styles.css è quella dell'avatar in testata) */
+.tbl tr.ma-me td { background: var(--accent-soft); }
+
+/* turno di chiamata */
+.tbl tr.ma-turn td { background: color-mix(in srgb, var(--lamp-green) 14%, var(--card)); }
+.tbl tr.ma-turn td:first-child { box-shadow: inset 3px 0 0 var(--lamp-green); }
+
+/* conteggio ruoli */
+.ma-rc { font-family: var(--f-label); font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; padding: 0 2px; }
+.ma-rc.U14 { color: var(--r-u14); }
+.ma-rc.U20 { color: var(--r-u20); }
+.ma-rc.SEN { color: var(--r-sen); }
+
+/* scambi: elenco atleti con spunta */
+.ma-checks { display: flex; flex-direction: column; max-height: 300px; overflow-y: auto; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 4px 10px; background: var(--card-2); }
+.ma-checks .check { padding: 6px 0; border-bottom: 1px dashed var(--line); min-width: 0; }
+.ma-checks .check:last-child { border-bottom: 0; }
+
+/* asta: ricerca, selezione, rilanci */
+.ma-results { max-height: 380px; overflow-y: auto; }
+.li.ma-sel { background: var(--accent-soft); border-radius: var(--radius-sm); padding-inline: 8px; }
+.ma-bidbox { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.ma-bids { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+.ma-bids .field { width: 130px; }
+.ma-lotname { font-family: var(--f-display); font-weight: 800; font-size: clamp(24px, 4vw, 34px); line-height: 1.05; margin: 2px 0 6px; min-width: 0; }
+.ma-rules { margin: 0; padding-left: 18px; }
+.ma-rules li { margin: 2px 0; }
+@keyframes ma-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+.timer-ring.hot { animation: ma-pulse .5s ease-in-out infinite; }
+@media (max-width: 420px) {
+  .ma-bidbox { gap: 12px; }
+  .bid-amount { font-size: 52px; }
+}
+
+/* ordine di chiamata */
+.ma-order .li { padding: 6px 2px; gap: 8px; }
+.ma-n { font-family: var(--f-display); font-weight: 800; font-size: 20px; color: var(--accent); width: 24px; text-align: center; flex: none; }
+
+/* rosa della mia squadra nel riepilogo finale */
+.card.ma-mine { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow); }
+
+/* asta a quote: copie libere di un atleta e squadre che lo hanno già */
+.ma-copie { color: var(--muted); }
+.ma-copie.ultima { color: var(--gold-ink); font-weight: 600; }
+.ma-owners { gap: 6px; margin-top: 6px; }
+.ma-checks .check .tag { flex: none; }
+
+/* ------------------------------------------------------------------ telefono */
+.ma-role-in, .ma-bidbar, .ma-l-sm { display: none; }
+.ma-lotname .ma-name { white-space: normal; overflow-wrap: anywhere; text-overflow: clip; }
+.ma-mov-dt { display: none; }
+@media (hover: none) { .ma-name:hover { color: inherit; } }
+@media (max-width: 720px), (max-height: 500px) and (pointer: coarse) {
+  /* stato del mercato e budget compatti, sempre leggibili sopra l'elenco */
+  .ma-regole > summary { min-height: 40px; display: flex; align-items: center; }
+  .ma-stato-2 { display: flex; align-items: flex-start; gap: 8px; }
+  .ma-stato-2 details { flex: 1; min-width: 0; }
+  .ma-stato .ma-apri { flex: none; }
+  .ma-budget .ma-l-lg { display: none; }
+  .ma-budget .ma-l-sm { display: inline; }
+  /* budget su una riga sola: «22 crediti | 8/8 rosa | 0 max | 98 spesi» */
+  .ma-kpis.ma-budget { display: flex; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 6px 2px; }
+  .ma-budget .ma-kpi { flex: 1 1 auto; display: flex; align-items: baseline; justify-content: center; gap: 4px; padding: 0 4px; border: 0; border-radius: 0; background: none; }
+  .ma-budget .ma-kpi + .ma-kpi { border-left: 1px solid var(--line); }
+  .ma-budget .ma-kpi .v { font-size: 19px; }
+  .ma-budget .ma-kpi .l { font-size: 12px; letter-spacing: .02em; overflow-wrap: normal; white-space: nowrap; }
+  /* filtri del mercato: ricerca in vista, il resto nel riquadro «Filtri e ordine» */
+  .ma-more { margin-top: 8px; }
+  .ma-more > summary { min-height: 44px; }
+  .ma-more .ma-filters { margin-top: 4px; }
+  /* righe con il nome che apre la scheda: tutta la riga è il bersaglio (i pulsanti restano sopra) */
+  .li.ma-tap { position: relative; min-height: 48px; }
+  .ma-tap .ma-name::after { content: ""; position: absolute; inset: 0; }
+  .ma-tap .btn { position: relative; z-index: 1; }
+  .ma-tap .ma-name { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.25; }
+  .ma-lotname .ma-name { min-height: 44px; display: flex; align-items: center; }
+  .ma-intro { display: none; }
+  /* filtri: ricerca a tutta riga, poi tre menu affiancati */
+  .ma-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ma-filters .field { flex: 1 1 84px; }
+  .ma-filters .field:first-child { flex-basis: 100%; }
+  .ma-filters .input { padding-inline: 8px; }
+
+  /* scambi: niente elenco che scorre dentro la pagina, righe da dito */
+  .ma-checks { max-height: none; overflow: visible; }
+  .ma-checks .check { min-height: 44px; padding: 8px 0; }
+  .ma-checks input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); flex: none; }
+
+  /* registro dei movimenti: righe impilate invece di sei colonne */
+  .ma-mov thead { display: none; }
+  .ma-mov, .ma-mov tbody { display: block; }
+  .ma-mov tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+  .ma-mov tr:last-child { border-bottom: 0; }
+  .ma-mov td { display: block; padding: 0; border: 0; }
+  .ma-mov .ma-mov-d { display: none; }
+  .ma-mov .ma-mov-dt { display: inline; }
+  .ma-mov .ma-mov-t, .ma-mov .ma-mov-s, .ma-mov .ma-mov-a { grid-column: 1; }
+  .ma-mov .ma-mov-s { font-weight: 600; }
+  .ma-mov .ma-mov-c { grid-column: 2; grid-row: 1 / span 3; align-self: center; font-family: var(--f-display); font-weight: 800; font-size: 18px; }
+  .ma-mov .ma-act { grid-column: 1 / -1; text-align: left; }
+  .ma-mov .ma-act:empty { display: none; }
+  .ma-mov .ma-act .btn.xs { min-height: 40px; padding-inline: 14px; }
+}
+@media (max-width: 480px) {
+  /* la mia rosa: maschera | nome e dati | ruolo, poi «Svincola» in fondo a destra (prima il testo restava largo 70-110px) */
+  .ma-rosa-li { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; grid-template-areas: "m b r" "m a a"; column-gap: 10px; row-gap: 6px; align-items: start; }
+  .ma-rosa-li > .mask { grid-area: m; }
+  .ma-rosa-li > .body { grid-area: b; }
+  .ma-rosa-li > .role { grid-area: r; margin-top: 2px; }
+  .ma-rosa-li > .btn { grid-area: a; justify-self: end; }
+  /* atleti in vendita: maschera | nome (2 righe) e dati | pulsante; tutta la riga apre la scheda */
+  .ma-row { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; column-gap: 10px; align-items: center; position: relative; }
+  .ma-row .ma-name { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.25; }
+  .ma-row .ma-name::after { content: ""; position: absolute; inset: 0; }
+  .ma-row .btn, .ma-row .ma-prezzo { position: relative; z-index: 1; }
+  .ma-row .ma-x, .ma-role-out { display: none; }
+  .ma-role-in { display: inline; }
+  .ma-role-in .role { vertical-align: 1px; }
+}
+
+/* asta: scelta dell'atleta da chiamare (tutta la riga) e scheda a parte */
+.ma-pick { padding: 0; gap: 6px; }
+.ma-pick-b { appearance: none; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 8px 2px; min-height: 56px; }
+.ma-pick-b .body { flex: 1; min-width: 0; }
+.ma-pick-b .ma-name, .ma-pick-b .sub, .ma-pick-b .ma-copie { display: block; }
+.ma-pick-t { flex: none; }
+.ma-info { font-family: var(--f-display); font-weight: 800; font-style: italic; color: var(--accent); flex: none; }
+.ma-only-xs { display: none; }
+.ma-sq-t { display: flex; flex-direction: column; min-width: 0; }
+.ma-err { color: var(--lamp-red); font-weight: 600; }
+.timer-ring.mini { width: 44px; height: 44px; flex: none; }
+.timer-ring.mini span { width: 34px; height: 34px; font-size: 16px; }
+.ma-inc-v { font-weight: 600; }
+
+@media (max-width: 720px), (max-height: 500px) and (pointer: coarse) {
+  /* barra dei rilanci (e della chiamata): fissa sopra la navigazione, pulsanti da 48px */
+  :root.ma-live { --bottom-ui: 136px; }
+  .ma-bidbar {
+    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 10px; align-items: center;
+    position: fixed; left: 0; right: 0; bottom: calc(var(--botnav-h) + env(safe-area-inset-bottom, 0px)); z-index: 38;
+    padding: 10px max(12px, env(safe-area-inset-right, 0px)) 10px max(12px, env(safe-area-inset-left, 0px));
+    background: var(--card); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(0, 0, 0, .18);
+  }
+  .ma-bb-t { min-width: 0; }
+  .ma-bb-o { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  .ma-bb-o b.num { font-family: var(--f-display); font-weight: 900; font-size: 26px; line-height: 1; }
+  .ma-bb-m { color: var(--muted); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .ma-incs { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 8px; }
+  .ma-bidbar .btn { min-height: 48px; justify-content: center; padding-inline: 10px; }
+  .ma-bb-f { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: end; }
+  .ma-bb-f .field { width: auto; }
+  /* chiamata: nome, ✕, poi − offerta + e «Chiama» */
+  .ma-callbar { grid-template-columns: minmax(0, 1fr) auto; }
+  .ma-step { grid-column: 1 / -1; display: grid; grid-template-columns: 44px minmax(56px, 76px) 44px minmax(0, 1fr); gap: 8px; align-items: center; }
+  .ma-step .input { min-height: 44px; text-align: center; padding-inline: 4px; }
+  .ma-step .ma-chiama { min-height: 48px; }
+  .ma-results { max-height: none; overflow: visible; }
+  .ma-has-bar .ma-bidbox { display: none; }
+  .ma-pick-t { display: none; }
+  .li.ma-sel { padding-inline: 4px; }
+
+  /* comandi del presidente: pausa grande, poi i comandi possibili in griglia, «Termina» separato */
+  .ma-cmds { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ma-cmds .btn { justify-content: center; white-space: normal; text-align: center; }
+  .ma-cmds .ma-cmd-main { grid-column: 1 / -1; min-height: 48px; }
+  .ma-cmds .ma-cmd-off { display: none; }
+  .ma-cmds .ma-cmd-end { grid-column: 1 / -1; margin-top: 12px; background: var(--card); color: var(--lamp-red); border-color: var(--lamp-red); }
+
+  /* listone senza asta: un pulsante principale, il mercato come secondo */
+  .card-f .ma-go { flex: 1 1 100%; justify-content: center; min-height: 48px; }
+  .card-f .ma-go2 { flex: 1 1 100%; justify-content: center; }
+  .ma-kpis { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; }
+}
+@media (max-width: 480px) {
+  .ma-hide-xs { display: none; }
+  .ma-only-xs { display: block; }
+}
+@media (max-width: 480px) {
+  /* telefono: timer, offerta e rilanci +1/+5/Altro su una riga sola (la barra resta sotto i 70px, il lotto si vede tutto);
+     il messaggio, già nella scheda del lotto, compare qui solo quando spiega perché non puoi rilanciare (.ma-bb-no),
+     e allora prende il posto dei pulsanti. Gli importi diversi (+10 e oltre) da «Altro». */
+  .ma-bidbar:not(.ma-callbar):not(.ma-bb-no) { grid-template-columns: auto minmax(0, 1fr) auto; padding-block: 8px; }
+  .ma-bidbar:not(.ma-bb-no) .ma-bb-m { display: none; }
+  .ma-bidbar:not(.ma-bb-no) .ma-incs { grid-column: auto; grid-template-columns: repeat(3, auto); gap: 6px; }
+  .ma-bidbar .ma-incs > :nth-child(3), .ma-bidbar .ma-inc-v { display: none; }
+  .ma-bidbar .ma-inc { min-width: 48px; }
+  .ma-bb-no .ma-incs { display: none; }
+}
+@media (max-width: 359px) {
+  .ma-bb-o .ma-ellip { font-size: 13px; }
+}

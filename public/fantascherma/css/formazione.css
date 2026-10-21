@@ -1,0 +1,167 @@
+/* Vista Formazione: integrazioni alla pedana di styles.css (solo token del tema). */
+
+/* selettore giornata */
+.fz-giornate { display: flex; gap: 6px; flex-wrap: wrap; }
+.fz-giornate .pill { gap: 6px; }
+.fz-giornate .pill.fz-past:not([aria-pressed="true"]) { opacity: .72; }
+
+/* testata della pedana (sempre su fondo blu notte, in entrambi i temi) */
+.fz-wrap .eyebrow { color: var(--on-navy-muted); }
+.fz-title { font-family: var(--f-display); font-weight: 800; font-size: clamp(24px, 4vw, 30px); line-height: 1.05; color: var(--on-navy); }
+.fz-sub { color: var(--on-navy-muted); font-size: 12px; }
+.fz-cd { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; text-align: right; }
+.fz-head2 { margin-top: 12px; }
+.fz-legend { display: inline-flex; gap: 4px; align-items: center; }
+.fz-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto; }
+.fz-hint { position: relative; z-index: 2; margin-top: 12px; text-align: center; font-size: 13px; color: var(--on-navy-muted); }
+.fz-hint b { color: var(--on-navy); }
+.fz-hint .linkbtn { color: var(--on-navy); }
+.fz-actions {
+  position: relative; z-index: 2; margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center;
+  padding: 8px 10px; border-radius: 14px;
+  background: color-mix(in srgb, var(--on-navy) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--on-navy) 18%, transparent);
+}
+.fz-actions .fz-selname { font-family: var(--f-label); font-weight: 700; font-size: 16px; letter-spacing: .02em; margin-right: 4px; color: var(--on-navy); }
+
+/* slot sulla pedana */
+.slot .nm.fz-dim { opacity: .7; font-size: 13px; }
+.slot.sel .ph { outline: 3px solid var(--gold); outline-offset: 2px; }
+.slot.fz-target .mask, .slot.fz-target .ph { outline: 2px dashed color-mix(in srgb, var(--on-navy) 65%, transparent); outline-offset: 3px; border-radius: 14px; }
+.slot .slot-btn:disabled { cursor: default; }
+.tag.fz-inf { padding: 0 5px; font-weight: 800; line-height: 18px; }
+
+/* panchina */
+.fz-bench-head { display: flex; align-items: baseline; gap: 4px 12px; flex-wrap: wrap; }
+.bench-card.fz-target { border-style: dashed; border-color: var(--accent); }
+.fz-tap { appearance: none; background: none; border: 0; color: inherit; cursor: pointer; padding: 0; width: 100%; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+.fz-mini { display: flex; gap: 6px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.fz-fm { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.fz-bench .ctrls { flex-wrap: wrap; justify-content: center; margin-top: 2px; }
+.fz-bench .iconbtn { width: 28px; height: 28px; font-size: 14px; }
+
+/* righe cliccabili (probabili, formazioni delle squadre) */
+.fz-line { appearance: none; background: none; border: 0; border-bottom: 1px solid var(--line); color: inherit; cursor: pointer; width: 100%; display: flex; align-items: center; gap: 10px; padding: 7px 2px; text-align: left; min-width: 0; }
+.fz-line:last-child { border-bottom: 0; }
+@media (hover: hover) { .fz-line:hover { background: var(--card-2); } }
+.fz-line .lamp { flex: none; }
+.fz-line .t { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.fz-line .fz-nm { font-weight: 600; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fz-line .fz-lbl { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fz-prob .probbar { background: var(--line); width: 52px; flex: none; }
+.fz-li { padding: 6px 0; }
+.fz-mt { margin-top: 14px; }
+.fz-ul { margin: 6px 0 0; padding-left: 18px; }
+.fz-ul li { margin: 3px 0; }
+.fz-lock { display: flex; gap: 10px; align-items: center; color: var(--muted); }
+
+/* formazioni di tutte le squadre */
+.fz-me { border-color: var(--accent); }
+.fz-tn { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fz-tot { display: flex; flex-direction: column; align-items: flex-end; }
+.fz-tot .fv { font-size: 26px; min-width: 0; }
+.fz-tags { gap: 6px; margin-bottom: 4px; }
+.fz-panc { margin-top: 8px; }
+
+@media (max-width: 680px) {
+  /* su due colonne la linea centrale orizzontale di styles.css taglia la riga di mezzo tra maschera e nome */
+  .fz-wrap .piste::before { display: none; }
+  .fz-cd { align-items: flex-start; text-align: left; }
+  .fz-btns { margin-left: 0; width: 100%; }
+}
+
+/* pulsanti chiari sulla pedana blu notte (in entrambi i temi): nel tema scuro i ghost sparivano */
+.fz-wrap .btn.ghost { background: color-mix(in srgb, var(--on-navy) 12%, transparent); color: var(--on-navy); border-color: color-mix(in srgb, var(--on-navy) 30%, transparent); }
+.fz-wrap .btn.ghost:disabled { opacity: .55; }
+
+/* elementi solo-telefono */
+.fz-savebar, .fz-tools, .fz-bench-lbl { display: none; }
+.fz-pre { display: inline; }
+
+/* foglio di scelta (telefono): chi entra, chi esce */
+.fz-picks { display: flex; flex-direction: column; }
+.fz-picks .eyebrow { margin-bottom: 2px; }
+.fz-pick {
+  appearance: none; background: none; border: 0; border-bottom: 1px solid var(--line); color: inherit; font: inherit; cursor: pointer; text-align: left;
+  width: 100%; min-height: 60px; display: flex; align-items: center; gap: 12px; padding: 8px 2px;
+}
+.fz-pick:last-child { border-bottom: 0; }
+.fz-pick .t { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.fz-pick .fz-nm { font-weight: 600; font-size: 16px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fz-pick .fz-lbl { font-size: 13px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fz-pk-x { font-weight: 500; color: var(--muted); }
+.fz-pk-r { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex: none; }
+.fz-pick-free .ph { width: 40px; height: 40px; border-radius: 50%; border: 2px dashed var(--line); display: grid; place-items: center; color: var(--muted); font-size: 20px; flex: none; }
+.fz-pick:active { background: var(--card-2); }
+
+@media (max-width: 720px), (max-height: 500px) and (pointer: coarse) {
+  /* ordine sul telefono: pedana, panchina, probabili, formazioni delle squadre, come funziona */
+  .fz-grid { display: flex; flex-direction: column; align-items: stretch; gap: 16px; }
+  .fz-grid > .fz-left, .fz-grid > .fz-right { display: contents; }
+  .fz-grid .fz-probabili { order: 1; }
+  .fz-grid .fz-tutte { order: 2; }
+  .fz-grid .fz-regole { order: 3; }
+
+  /* giornate su una riga che scorre, la scelta resta in vista */
+  .fz-giornate { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; margin-inline: -16px; padding: 2px 16px 6px; scroll-padding-inline: 16px; }
+  .fz-giornate::-webkit-scrollbar { display: none; }
+  .fz-giornate .pill { flex: none; scroll-snap-align: center; }
+
+  /* testata della pedana compatta: titolo e conto alla rovescia sulla stessa riga */
+  .fz-wrap .piste-head:first-child { flex-wrap: nowrap; align-items: center; }
+  .fz-cd { align-items: flex-end; text-align: right; }
+  .fz-legend, .fz-cd .fz-sub, .fz-cd > .eyebrow, .fz-btns { display: none; }
+  .fz-cd .countdown { font-size: 20px; padding: 5px 12px; }
+  .fz-pre { display: none; }
+
+  /* zone di fondo in alto e in basso: la pedana sul telefono è verticale */
+  .fz-wrap .piste {
+    background:
+      linear-gradient(180deg, rgba(221, 59, 64, .35) 0 22px, transparent 22px calc(100% - 22px), rgba(221, 59, 64, .35) calc(100% - 22px)),
+      linear-gradient(180deg, #2b3a8f, #1d2a76);
+  }
+  .fz-wrap .piste-slots { padding: 30px 4px; }
+
+  /* panchina come elenco: riga di ~60px con nome, probabilità e frecce da 44px */
+  .fz-bench { grid-template-columns: minmax(0, 1fr); gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+  .fz-bench .bench-card { flex-direction: row; align-items: center; text-align: left; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 8px 10px 8px 12px; gap: 10px; }
+  .fz-bench .bench-card:last-child { border-bottom: 0; }
+  .fz-bench .bench-card .ord { position: static; width: 16px; flex: none; text-align: center; }
+  .fz-bench .bench-card.sel { outline-offset: -3px; }
+  .fz-tap { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; text-align: left; flex: 1; gap: 2px 10px; }
+  .fz-tap .mask { grid-row: span 3; }
+  .fz-tap .nm { font-size: 15px; text-align: left; }
+  .fz-tap .fz-mini { justify-content: flex-start; }
+  .fz-tap .probbar { display: none; }
+  .fz-bench-lbl { display: block; font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .fz-bench .ctrls { flex-wrap: nowrap; margin: 0; flex: none; }
+  .fz-bench .iconbtn { width: 44px; height: 44px; font-size: 16px; }
+  .fz-bench .fz-tit { display: none; }
+
+  .fz-tools { display: flex; gap: 8px; }
+  .fz-tools .btn { flex: 1 1 0; justify-content: center; white-space: normal; text-align: center; }
+
+  /* barra di salvataggio: in fondo alla pagina; quando c'è qualcosa da salvare resta appiccicata sopra la navigazione */
+  .fz-savebar {
+    display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap; z-index: 20;
+    margin-inline: -16px; padding: 10px 16px; background: var(--card); border-top: 1px solid var(--line);
+  }
+  .fz-savebar.on { position: sticky; bottom: calc(var(--botnav-h) + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -6px 18px rgba(0, 0, 0, .1); }
+  .fz-savebar { flex-wrap: nowrap; }
+  .fz-sb-t { flex: 1 1 0; min-width: 0; display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+  .fz-sb-t .tag { white-space: normal; }
+  .fz-why { color: var(--muted); }
+  .fz-savebar .fz-sb-btn { flex: none; min-height: 48px; justify-content: center; padding-inline: 18px; }
+  /* gli avvisi salgono sopra la barra; con un foglio aperto vanno in alto (styles.css) e questa regola non vale */
+  :root:has(.fz-savebar.on):not(.modal-open) .toasts { bottom: calc(96px + var(--botnav-h) + env(safe-area-inset-bottom, 0px)); }
+
+  /* probabili: righe da dito */
+  .fz-line { min-height: 48px; }
+}
+/* schermi bassi (iPhone SE, telefono in orizzontale): barra di salvataggio più sottile */
+@media (max-width: 720px) and (max-height: 640px), (max-height: 500px) and (pointer: coarse) {
+  .fz-savebar { padding-block: 6px; }
+  .fz-savebar .fz-sb-btn { min-height: 44px; }
+  :root:has(.fz-savebar.on):not(.modal-open) .toasts { bottom: calc(80px + var(--botnav-h) + env(safe-area-inset-bottom, 0px)); }
+}
+
